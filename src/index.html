@@ -37,11 +37,9 @@
 </head>
 
 <body>
-
-  <div id="screen-1" class="screens">
+  <div id="main-screen">
     <div id="info">
-      <a href="#info"><img id="button-info" class="buttons-2" src="img/info.png" width="16" height="16"
-          title="About" alt="" /></a>
+      <a href="#about"><img class="button-info" src="img/info.png" title="About" alt="" /></a>
     </div>
     <ul id="tabs" class="buttons clearfix">
       <li id="hash" class="on l1">Hash</li>
@@ -59,36 +57,31 @@
       <div class="title">
         Input:
       </div>
-      <textarea id="input-value" style="min-width: 400px;" autofocus></textarea>
-      <div id="input-password-wrapper" style="display: none;">
+      <textarea id="input-value" autofocus></textarea>
+      <div id="input-password-wrapper">
         <div class="title">
           Password:
         </div>
-        <input id="input-password" type="password" />
+        <input id="input-password" type="text" />
       </div>
     </div>
-
     <!-- output -->
     <div id="output">
     </div>
   </div>
 
-  <div id="screen-2" class="screens">
-
+  <div id="about">
     <div style="position: absolute;">
-      <a href="" class="button">Back</a>
+      <a href="#main" class="button">Back</a>
     </div>
-
-    <h1 style="text-align: center;">
+    <h1>
       About
     </h1>
-
     <p>
       This app is used to compute cryptographic hashes and do common conversions. It might be useful for
       programmers and system administrators.
       It's entirely implemented in JavaScript, all calculations are performed on client side, so <b>it's safe</b>.
     </p>
-
     <ul>
       <li>
         <b>Hash</b>:
@@ -129,17 +122,14 @@
         Base64, ROT-13, JavaScript encodeURI(), encodeURIComponent(), HTML special chars encode/decode
       </li>
     </ul>
-
     <p>
       <b>Usage:</b> enter text and click on the result. It will be <b>copied to clipboard</b>.
     </p>
-
     <p>
       App is using <a href="http://code.google.com/p/crypto-js/" target="_blank">crypto-js</a> and other
       open-source libraries.<br />
       See the source code on&nbsp;<a href="http://github.com/s12v/hasher" target="_blank">github</a>.
     </p>
-
     <p>
       Developed by <strong>Sergey Novikov</strong>
     </p>

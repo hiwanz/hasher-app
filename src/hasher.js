@@ -1,5 +1,5 @@
 
-var tabs = {
+let tabs = {
   hash : 1,
   hmac : 2,
   crc : 3,
@@ -14,12 +14,11 @@ var tabs = {
  *  Copy to clipboard
  */
 function copyToClipboard(id) {
-  $("#"+id).select(); 
-  document.execCommand('copy');
+  $("#"+id).select()
+  document.execCommand('copy')
 }
 
-
-var hasher = {
+let hasher = {
   ipcalc : new ipCalc(),
   tab : tabs.hash,
   elements: {
@@ -252,7 +251,7 @@ var hasher = {
       title : "AES-256 decrypt",
       calculate : function (input, password) {
         try {
-          var words = CryptoJS.AES.decrypt(input, password);
+          let words = CryptoJS.AES.decrypt(input, password);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -265,7 +264,7 @@ var hasher = {
       title : "DES decrypt",
       calculate : function (input, password) {
         try {
-          var words = CryptoJS.DES.decrypt(input, password);
+          let words = CryptoJS.DES.decrypt(input, password);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -278,7 +277,7 @@ var hasher = {
       title : "TripleDES decrypt",
       calculate : function (input, password) {
         try {
-          var words = CryptoJS.TripleDES.decrypt(input, password);
+          let words = CryptoJS.TripleDES.decrypt(input, password);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -291,7 +290,7 @@ var hasher = {
       title : "Rabbit decrypt",
       calculate : function (input, password) {
         try {
-          var words = CryptoJS.Rabbit.decrypt(input, password);
+          let words = CryptoJS.Rabbit.decrypt(input, password);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -304,7 +303,7 @@ var hasher = {
       title : "RC4 decrypt",
       calculate : function (input, password) {
         try {
-          var words = CryptoJS.RC4.decrypt(input, password);
+          let words = CryptoJS.RC4.decrypt(input, password);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -317,7 +316,7 @@ var hasher = {
       title : "RC4Drop decrypt",
       calculate : function (input, password) {
         try {
-          var words = CryptoJS.RC4Drop.decrypt(input, password);
+          let words = CryptoJS.RC4Drop.decrypt(input, password);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -331,7 +330,7 @@ var hasher = {
       tab : tabs.net,
       title: "IP to Dec",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getIp() != null) {
           return ipcalc.getIp();
@@ -346,7 +345,7 @@ var hasher = {
       tab : tabs.net,
       title: "Dec to IP",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getIp() != null) {
           return ipcalc.intToOctetString(ipcalc.getIp());
@@ -363,7 +362,7 @@ var hasher = {
       title: "IP to Bin",
       ruler: 1,
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getIp() != null) {
           return ipcalc.getPaddedBinString(ipcalc.getIp());
@@ -377,7 +376,7 @@ var hasher = {
       tab : tabs.net,
       title: "IP to Hex",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getIp() != null) {
           return ipcalc.getIp().toString(16);
@@ -391,7 +390,7 @@ var hasher = {
       tab : tabs.net,
       title: "Network / netmask",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getNetmask() != null) {
           return ipcalc.intToOctetString(ipcalc.getNetwork()) + "/" + ipcalc.intToOctetString(ipcalc.getNetmask());
@@ -407,7 +406,7 @@ var hasher = {
       tab : tabs.net,
       title: "Min host",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getNetmask() != null) {
           return ipcalc.intToOctetString(ipcalc.gethHostMin());
@@ -421,7 +420,7 @@ var hasher = {
       tab : tabs.net,
       title: "Max host",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getNetmask() != null) {
           return ipcalc.intToOctetString(ipcalc.gethHostMax());
@@ -435,7 +434,7 @@ var hasher = {
       tab : tabs.net,
       title: "Broadcast",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getNetmask() != null) {
           return ipcalc.intToOctetString(ipcalc.getBroadcast());
@@ -449,7 +448,7 @@ var hasher = {
       tab : tabs.net,
       title: "Hosts",
       calculate: function (input) {
-        var ipcalc = hasher.ipcalc;
+        let ipcalc = hasher.ipcalc;
         ipcalc.parse(input);
         if (ipcalc.getNetmask() != null) {
           return ipcalc.gethHostCount();
@@ -466,7 +465,7 @@ var hasher = {
       tab : tabs.time,
       title: "Unixtime",
       calculate: function (input) {
-        var date;
+        let date;
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
@@ -483,7 +482,7 @@ var hasher = {
       tab : tabs.time,
       title: "Local time",
       calculate: function (input) {
-        var date;
+        let date;
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
@@ -500,19 +499,19 @@ var hasher = {
       tab : tabs.time,
       title: "DATETIME (local)",
       calculate: function (input) {
-        var ddd;
+        let ddd;
         if (/[^\d]/.test(input)) {
           ddd = new Date(input);
         } else {
           ddd = new Date(1000*parseInt(input));
         }
         if (!isNaN(ddd.getTime())) {
-          var y = ddd.getFullYear();
-          var m = ddd.getMonth() + 1;
-          var d = ddd.getDate();
-          var h = ddd.getHours();
-          var i = ddd.getMinutes();
-          var s = ddd.getSeconds();
+          let y = ddd.getFullYear();
+          let m = ddd.getMonth() + 1;
+          let d = ddd.getDate();
+          let h = ddd.getHours();
+          let i = ddd.getMinutes();
+          let s = ddd.getSeconds();
           
           m = (m < 10) ? "0" + m : m;
           d = (d < 10) ? "0" + d : d;
@@ -530,19 +529,19 @@ var hasher = {
       tab : tabs.time,
       title: "DATETIME (UTC)",
       calculate: function (input) {
-        var ddd;
+        let ddd;
         if (/[^\d]/.test(input)) {
           ddd = new Date(input);
         } else {
           ddd = new Date(1000*parseInt(input));
         }
         if (!isNaN(ddd.getTime())) {
-          var y = ddd.getUTCFullYear();
-          var m = ddd.getUTCMonth() + 1;
-          var d = ddd.getUTCDate();
-          var h = ddd.getUTCHours();
-          var i = ddd.getUTCMinutes();
-          var s = ddd.getUTCSeconds();
+          let y = ddd.getUTCFullYear();
+          let m = ddd.getUTCMonth() + 1;
+          let d = ddd.getUTCDate();
+          let h = ddd.getUTCHours();
+          let i = ddd.getUTCMinutes();
+          let s = ddd.getUTCSeconds();
           
           m = (m < 10) ? "0" + m : m;
           d = (d < 10) ? "0" + d : d;
@@ -560,7 +559,7 @@ var hasher = {
       tab : tabs.time,
       title: "RFC-1123",
       calculate: function (input) {
-        var date;
+        let date;
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
@@ -577,7 +576,7 @@ var hasher = {
       tab : tabs.time,
       title: "ISO 8601",
       calculate: function (input) {
-        var date;
+        let date;
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
@@ -631,7 +630,7 @@ var hasher = {
       tab : tabs.number,
       title: "Dec to Roman",
       calculate: function (input) {
-        var rc = new RomanConverter();
+        let rc = new RomanConverter();
         return rc.decToRoman(input);
       }
     },
@@ -640,7 +639,7 @@ var hasher = {
       tab : tabs.number,
       title: "Roman to Dec",
       calculate: function (input) {
-        var rc = new RomanConverter();
+        let rc = new RomanConverter();
         return rc.romanToDec(input);
       }
     },
@@ -654,7 +653,7 @@ var hasher = {
       ruler: 2,
       calculate: function (input) {
         try {
-          var words = CryptoJS.enc.Latin1.parse(input);
+          let words = CryptoJS.enc.Latin1.parse(input);
           return CryptoJS.enc.Hex.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -670,7 +669,7 @@ var hasher = {
           return "NaN";
         }
         try {
-          var words = CryptoJS.enc.Hex.parse(input);
+          let words = CryptoJS.enc.Hex.parse(input);
           return CryptoJS.enc.Latin1.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -685,7 +684,7 @@ var hasher = {
       ruler: 2,
       calculate: function (input) {
         try {
-          var words = CryptoJS.enc.Utf8.parse(input);
+          let words = CryptoJS.enc.Utf8.parse(input);
           return CryptoJS.enc.Hex.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -701,7 +700,7 @@ var hasher = {
           return "NaN";
         }
         try {
-          var words = CryptoJS.enc.Hex.parse(input);
+          let words = CryptoJS.enc.Hex.parse(input);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -716,7 +715,7 @@ var hasher = {
       ruler: 2,
       calculate: function (input) {
         try {
-          var words = CryptoJS.enc.Utf16.parse(input);
+          let words = CryptoJS.enc.Utf16.parse(input);
           return CryptoJS.enc.Hex.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -732,7 +731,7 @@ var hasher = {
           return "NaN";
         }
         try {
-          var words = CryptoJS.enc.Hex.parse(input);
+          let words = CryptoJS.enc.Hex.parse(input);
           return CryptoJS.enc.Utf16.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -749,7 +748,7 @@ var hasher = {
       title : "Base64",
       calculate : function (input) {
         try {
-          var words = CryptoJS.enc.Utf8.parse(input);
+          let words = CryptoJS.enc.Utf8.parse(input);
           return CryptoJS.enc.Base64.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -762,7 +761,7 @@ var hasher = {
       title : "Base64 decode",
       calculate : function (input) {
         try {
-          var words = CryptoJS.enc.Base64.parse(input);
+          let words = CryptoJS.enc.Base64.parse(input);
           return CryptoJS.enc.Utf8.stringify(words);
         } catch (err) {
           return "";
@@ -776,7 +775,7 @@ var hasher = {
       ruler: 2,
       calculate : function (input) {
         try {
-          var words = CryptoJS.enc.Base64.parse(input);
+          let words = CryptoJS.enc.Base64.parse(input);
           return CryptoJS.enc.Hex.stringify(words);
         } catch (err) {
           return "Parse error";
@@ -854,7 +853,7 @@ var hasher = {
       tab : tabs.encode,
       title : "ROT13 encode/decode",
       calculate : function (input) {
-        var renc = new Rot13();
+        let renc = new Rot13();
         return renc.encode(input);
       }
     }
@@ -873,17 +872,17 @@ var hasher = {
     // render HTML
     this.render();
     // Register click events
-    for (var i in this.elements) {
+    for (let i in this.elements) {
       if (this.elements[i].tab == this.tab) {
         // expand textarea
         $("#"+this.elements[i].id+"-expand").click(function () {
-          var id = this.id.toString().replace("-expand", "");
+          let id = this.id.toString().replace("-expand", "");
           if (!$("#"+this.id).hasClass("on")) {
-            var element = hasher.getElementById(id);
+            let element = hasher.getElementById(id);
             if (element) {
               $("#"+id).attr("rows", element.rows);
             }
-            //var h = $("#"+id)[0].scrollHeight;
+            //let h = $("#"+id)[0].scrollHeight;
             //$("#"+id).height(h);
           } else {
             $("#"+id).attr("rows", "1");
@@ -894,7 +893,7 @@ var hasher = {
         // copy to clibboard on click
         $("#"+this.elements[i].id+"-value").click(function () {
           $("#output .note").hide();
-          var id = this.id.toString().replace("-value", "");
+          let id = this.id.toString().replace("-value", "");
           if ($("#"+id).val().length > 0) {
             $("#"+id+"-note").text("copied").show('fast');
             copyToClipboard(id);
@@ -908,18 +907,18 @@ var hasher = {
    */
   update : function () {
     $("#output .note").hide();
-    var input = $("#input-value").val();
-    var password = $("#input-password").val();
-    for (var i in this.elements) {
+    let input = $("#input-value").val();
+    let password = $("#input-password").val();
+    for (let i in this.elements) {
       this.elements[i].rows = 0;
       if (this.elements[i].tab == this.tab) {
         // main calculation
-        var value = this.elements[i].calculate(input, password);
+        let value = this.elements[i].calculate(input, password);
         $("#"+this.elements[i].id).val(value);
 
         // expand
-        var res = value.toString().match(/(\n\r|\r\n|\n|\r)/g);
-        var rows = 1;
+        let res = value.toString().match(/(\n\r|\r\n|\n|\r)/g);
+        let rows = 1;
         if (res != null && res.length != undefined) {
           rows = res.length + 1;
         }
@@ -943,9 +942,9 @@ var hasher = {
    */
   render : function () {
     $("#output").html("");
-    for (var i in this.elements) {
+    for (let i in this.elements) {
       if (this.elements[i].tab == this.tab) {
-        var html = 
+        let html = 
           '<div class="element">'+
             '<div>'+
               '<span id="'+this.elements[i].id+'-title" class="title">'+
@@ -972,10 +971,10 @@ var hasher = {
    * Symbol's numbers
    */
   ruler : function (value, type) {
-    var html = "";
-    var length = value.length;
+    let html = "";
+    let length = value.length;
     if (type == -1) {
-      for (var i = 0; i < value.length; i++) {
+      for (let i = 0; i < value.length; i++) {
         html += '<span title="'+(length - i - 1)+'">&nbsp;</span>';
       }
     } else if (type == 2) {

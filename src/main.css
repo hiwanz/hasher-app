@@ -9,26 +9,20 @@ ul.buttons {
   padding: 0;
   list-style-type: none;
 }
-ul.buttons li, a.button {
-  display: inline-block;
-  background: linear-gradient(top, #f7f7f7, #ededed);
+ul.buttons li {
+  float: left;
   border: 1px solid #d9d9d9;
   border-radius: 3px;
   color: #444;
-  margin: 0;
+  margin: 0 5px 0 0;
   height: 28px;
   line-height: 28px;
   padding: 0px 10px;
   cursor: pointer;
-  font-family: sans-serif;
   font-weight: bold;
   font-size: 11px;
   text-decoration: none;
   text-shadow: 0 1px 0 #ffffff;
-}
-ul.buttons li {
-  margin-right: 5px;
-  float: left;
 }
 ul.buttons li.l1 {
   margin: 0;  
@@ -43,7 +37,7 @@ ul.buttons li.l3 {
   border-left: none;
   border-radius: 0 3px 3px 0;
 }
-ul.buttons li:hover, a.button:hover {
+ul.buttons li:hover {
   border: 1px solid #bebebe;
   box-shadow: 1px 1px 1px #e9e9e9;
 }
@@ -52,39 +46,37 @@ ul.buttons li.l2:hover, ul.buttons li.l3:hover {
 }
 ul.buttons li.on {
   color: #111;
-  background: linear-gradient(top, #efefef, #d7d7d7);
   border: 1px solid #b6b6b6;
-  box-shadow: inset 0 0 3px #c3c3c3;
+  box-shadow: inset 0 0 3px #c0c0c0;
   text-shadow: 0 1px 0 #f6f6f6;
 }
 ul.buttons li.l2.on, ul.buttons li.l3.on {
   margin-left: -1px;
 }
-
 #input {
   margin-top: 5px;
 }
-#input textarea {
+textarea {
   width: 100%;
-  font-family: monospace;
+  padding: 0;
+  resize: none;
 }
 #input input {
   width: 200px;
-  font-family: monospace;
 }
 #input .title {
   font-size: 12px;
   font-weight: bold;
-  font-family: sans-serif;
 }
-
+#input-password-wrapper {
+  display: none;
+}
 #output .element {
   margin-top: 5px;
   font-size: 12px;
 }
 #output .title {
   font-weight: bold;
-  font-family: sans-serif;
 }
 #output .expand {
   position: relative;
@@ -92,9 +84,6 @@ ul.buttons li.l2.on, ul.buttons li.l3.on {
   bottom: 0px;
   padding: 2px 10px 2px 10px;
   background-color: #f5f5f5;
-  background-image: linear-gradient(top, #ffffff, #f5f5f5);
-  background-repeat: no-repeat;
-  background-position: left center;
   border-radius: 5px 5px 0 0;
   border-top: 1px solid #e3e3e3;
   border-right: 1px solid #e0e0e0;
@@ -123,24 +112,18 @@ ul.buttons li.l2.on, ul.buttons li.l3.on {
   padding: 5px;
   position: relative;
   background-color: #f5f5f5;
-  width: 100%;
-  font-family: monospace;
   border-radius: 3px;
   cursor: pointer;
 }
 
 #output .value textarea {
-  font-family: monospace;
   font-size: 12px;
-  margin: 0;
-  padding: 0;
   background-color: transparent;
   border: none;
   width: 100%;
   cursor: pointer;
 }
 #output .ruler {
-  font-family: monospace;
   font-size: 12px;
   position: absolute;
   left: 5px;
@@ -157,18 +140,26 @@ ul.buttons li.l2.on, ul.buttons li.l3.on {
   line-height: 30px;
 }
 
-.buttons-2 {
+.button-info {
   opacity: 0.4;
   cursor: pointer;
   padding: 7px;
   vertical-align: top;
 }
 
-.screens {
+#about {
+  background-color: white;
   display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  height: 100%;
+  padding: 10px;
 }
 
-h1 {
+#about h1 {
+  text-align: center;
   font-size: 22px;
   margin: 0;
   padding: 0;
