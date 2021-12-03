@@ -12,6 +12,11 @@ const createWindow = () => {
   // and load the index.html of the app.
   mainWindow.loadFile('src/index.html')
 
+  // Open links in external browser
+  mainWindow.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url)
+  })
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -34,11 +39,4 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
-})
-// Open links in external browser
-app.on('web-contents-created', (e, webContents) => {
-  webContents.on('new-window', (event, url) => {
-    event.preventDefault()
-    shell.openExternal(url)
-  })
 })
