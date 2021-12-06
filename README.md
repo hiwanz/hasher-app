@@ -1,7 +1,8 @@
 # Hasher App
 
-Standalone version for browsers:  
-https://s12v.github.io/hasher/
+## Introduction
+
+Standalone version for https://s12v.github.io/hasher/
 
 The app is used to compute cryptographic hashes and perform conversions. 
 It is useful for programmers and system administrators. 
@@ -16,3 +17,7 @@ The app is implemented in JavaScript. All calculations are performed on the clie
 * <b>Numbers:</b> Dec ↔ Hex, Dec ↔ Bin, Dec ↔ Roman
 * <b>Strings:</b> ASCII ↔ Hex, UTF-8 ↔ Hex, UTF-16 ↔ Hex
 * <b>Encode:</b> Base64, ROT-13, JavaScript encodeURI(), encodeURIComponent(), HTML special chars encode/decode
+
+## Development
+
+This app is built with Nodejs + Electron, you'd better know this if you want to make some changes.
