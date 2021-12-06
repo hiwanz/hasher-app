@@ -1,14 +1,14 @@
 {
-  "name": "hasher-app",
+  "name": "hasher",
   "version": "1.0.0",
   "description": "a fork from https://github.com/s12v/hasher",
   "main": "src/app.js",
   "scripts": {
     "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make-mac": "electron-forge make --platform darwin",
-    "make-linux": "electron-forge make --platform linux",
-    "make-win32": "electron-forge make --platform win32"
+    "package-mac": "electron-forge package --platform=darwin",
+    "package-win32": "electron-forge package --platform=win32 --arch=ia32",
+    "make-mac": "electron-forge make --platform=darwin",
+    "make-win32": "electron-forge make --platform=win32"
   },
   "author": "hiwanz",
   "license": "MIT",
@@ -37,11 +37,7 @@
         },
         {
           "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin",
-            "linux",
-            "win32"
-          ]
+          "platforms": ["darwin", "win32"]
         },
         {
           "name": "@electron-forge/maker-deb",
