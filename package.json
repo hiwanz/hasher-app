@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron-forge start",
     "package-mac": "electron-forge package --platform=darwin",
-    "package-win32": "electron-forge package --platform=win32 --arch=ia32",
+    "package-win32": "electron-forge package --platform=win32",
     "make-mac": "electron-forge make --platform=darwin",
     "make-win32": "electron-forge make --platform=win32"
   },
@@ -32,7 +32,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "hasher_app"
+            "name": "hasher"
           }
         },
         {
