@@ -955,7 +955,7 @@ let hasher = {
             '</div>'+
             '<div id="'+this.elements[i].id+'-value" class="value">'+
               //'<input id="'+this.elements[i].id+'" type="text" />';
-              '<textarea id="'+this.elements[i].id+'" rows="1"></textarea>';
+              '<textarea id="'+this.elements[i].id+'" rows="1" readonly></textarea>';
               // ruler
               if (this.elements[i].ruler != undefined) {
                 html += '<div id="'+this.elements[i].id+'-ruler" class="ruler"></div>'
