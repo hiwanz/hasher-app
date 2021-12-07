@@ -8,7 +8,8 @@ const createWindow = () => {
     width: 800,
     height: 600
   })
-
+  // Hide the menu bar
+  mainWindow.removeMenu()
   // and load the index.html of the app.
   mainWindow.loadFile('src/index.html')
 
