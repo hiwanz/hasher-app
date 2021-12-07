@@ -6,7 +6,10 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    webPreferences: {
+      devTools: false
+    }
   })
   // Hide the menu bar
   mainWindow.removeMenu()
@@ -21,7 +24,13 @@ const createWindow = () => {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
-
+// Set about panel information
+app.setAboutPanelOptions({
+  iconPath: 'src/img/icon-64.png',
+  credits: 'Thx for s12v\'s work',
+  authors: ['hiwanz', 's12v'],
+  website: 'https://github.com/hiwanz/hasher-app'
+})
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -34,7 +43,6 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
-
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
