@@ -131,7 +131,7 @@ let hasher = {
     hm5: {
       id : tabs.hmac+"sha384",
       tab : tabs.hmac,
-      title : "HMAC-SHA256",
+      title : "HMAC-SHA384",
       calculate : function (input, password) {
         return CryptoJS.HmacSHA384(input, password);
       }
