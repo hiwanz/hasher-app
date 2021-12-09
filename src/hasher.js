@@ -646,6 +646,14 @@ let hasher = {
 
 
     // Strings
+    s0: {
+      id: tabs.string + "i0",
+      tab: tabs.string,
+      title: "String Length",
+      calculate: function (input) {
+        return input.length
+      }
+    },
     s1 : {
       id: tabs.string+"i1",
       tab : tabs.string,
