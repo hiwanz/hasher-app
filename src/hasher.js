@@ -469,10 +469,10 @@ let hasher = {
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
-          date = new Date(1000*parseInt(input));
+          date = input.length == 13 ? new Date(parseInt(input)) : new Date(1000*parseInt(input));
         }
         if (!isNaN(date.getTime())) {
-          return date.getTime()/1000;
+          return parseInt(date.getTime()/1000);
         }
         return "";
       }
@@ -486,7 +486,7 @@ let hasher = {
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
-          date = new Date(1000*parseInt(input));
+          date = input.length == 13 ? new Date(parseInt(input)) : new Date(1000*parseInt(input));
         }
         if (!isNaN(date.getTime())) {
           return date.toLocaleString();
@@ -503,7 +503,7 @@ let hasher = {
         if (/[^\d]/.test(input)) {
           ddd = new Date(input);
         } else {
-          ddd = new Date(1000*parseInt(input));
+          ddd = input.length == 13 ? new Date(parseInt(input)) : new Date(1000*parseInt(input));
         }
         if (!isNaN(ddd.getTime())) {
           let y = ddd.getFullYear();
@@ -533,7 +533,7 @@ let hasher = {
         if (/[^\d]/.test(input)) {
           ddd = new Date(input);
         } else {
-          ddd = new Date(1000*parseInt(input));
+          ddd = input.length == 13 ? new Date(parseInt(input)) : new Date(1000*parseInt(input));
         }
         if (!isNaN(ddd.getTime())) {
           let y = ddd.getUTCFullYear();
@@ -563,7 +563,7 @@ let hasher = {
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
-          date = new Date(1000*parseInt(input));
+          date = input.length == 13 ? new Date(parseInt(input)) : new Date(1000*parseInt(input));
         }
         if (!isNaN(date.getTime())) {
           return date.toUTCString();
@@ -580,7 +580,7 @@ let hasher = {
         if (/[^\d]/.test(input)) {
           date = new Date(input);
         } else {
-          date = new Date(1000*parseInt(input));
+          date = input.length == 13 ? new Date(parseInt(input)) : new Date(1000*parseInt(input));
         }
         if (!isNaN(date.getTime())) {
           return date.toISOString();
