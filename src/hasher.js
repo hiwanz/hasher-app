@@ -7,7 +7,8 @@ let tabs = {
   net : 5,
   time : 6,
   encode : 7,
-  number : 8
+  number : 8,
+  morse: 9
 };
 
 /*
@@ -863,6 +864,22 @@ let hasher = {
       calculate : function (input) {
         let renc = new Rot13();
         return renc.encode(input);
+      }
+    },
+    morse1: {
+      id: tabs.morse+"morse-encode",
+      tab: tabs.morse,
+      title: "Morse encode",
+      calculate : function (input) {
+        return xmorse.encode(input, { space: ' ' });
+      }
+    },
+    morse2: {
+      id: tabs.morse+"morse-decode",
+      tab: tabs.morse,
+      title: "Morse decode",
+      calculate : function (input) {
+        return xmorse.decode(input, { space: ' ' });
       }
     }
   },
