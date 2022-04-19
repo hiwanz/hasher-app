@@ -1,12 +1,12 @@
 $(function() {
 
   $("#input").keyup(function () {
-    hasher.update();
-  });
+    hasher.update()
+  })
 
   $("#input").change(function () {
-    hasher.update();
-  });
+    hasher.update()
+  })
 
   // Click on tab (Hash/HMAC/...)
   $("#tabs li").click(function () {
@@ -16,9 +16,9 @@ $(function() {
 
     // show/hide optional fields
     if (tabs[this.id] == tabs.hmac || tabs[this.id] == tabs.cipher) {
-      $("#input-password-wrapper").show();
+      $("#input-password-wrapper").show()
     } else {
-      $("#input-password-wrapper").hide();
+      $("#input-password-wrapper").hide()
     }
 
     hasher.tab = tabs[this.id]
@@ -46,4 +46,4 @@ $(function() {
   onHashChange()
   hasher.init()
   hasher.update()
-});
+})
