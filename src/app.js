@@ -3,6 +3,8 @@ const { app, BrowserWindow, shell } = require('electron')
 const path = require('path')
 
 const createWindow = () => {
+  // Quit when installing, see https://www.electronforge.io/config/makers/squirrel.windows#my-app-is-launching-multiple-times-during-install
+  if (require('electron-squirrel-startup')) { return app.quit() }
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
