@@ -16,7 +16,7 @@ const createWindow = () => {
   // Hide the menu bar
   mainWindow.removeMenu()
   // and load the index.html of the app.
-  mainWindow.loadFile('src/index.html')
+  mainWindow.loadFile(path.join(__dirname, 'index.html'))
 
   // Open links in external browser
   mainWindow.webContents.setWindowOpenHandler((details) => {
