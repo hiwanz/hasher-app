@@ -20,7 +20,7 @@ The app is implemented in JavaScript. All calculations are performed on the clie
 
 ## Development
 
-This app is built with Nodejs + Electron, you'd better know this if you want to make some changes. For MacOS, you need to install [Wine](https://www.winehq.org/) to make it work for Windows platform. I use `gcenx/wine` as a wrapper for Wine, cuz it avoids some problems like [CreateZipFromDirectory exception on macOS](https://github.com/Squirrel/Squirrel.Windows/issues/1605).
+This app is built with Nodejs + Electron, you'd better know this if you want to make some changes. For MacOS(Intel chip, not M series), you need to install [Wine](https://www.winehq.org/) to make it work for Windows platform. I use `gcenx/wine` as a wrapper for Wine, cuz it avoids some problems like [CreateZipFromDirectory exception on macOS](https://github.com/Squirrel/Squirrel.Windows/issues/1605).
 
 **Install Wine via Homebrew:**
 
