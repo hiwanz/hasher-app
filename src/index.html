@@ -1,10 +1,11 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Hasher</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="main.css" type="text/css" rel="stylesheet" />
-  <script src="lib/jquery-3.6.0.min.js" type="text/javascript"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hasher — Cryptographic Utilities</title>
+  <link href="main.css" rel="stylesheet" />
+  <script src="lib/jquery-3.6.0.min.js"></script>
   <script src="lib/cryptojs/components/core-min.js"></script>
   <script src="lib/cryptojs/components/enc-base64-min.js"></script>
   <script src="lib/cryptojs/components/enc-utf16-min.js"></script>
@@ -38,104 +39,171 @@
 </head>
 
 <body>
-  <div id="main-screen">
-    <div id="info">
-      <a href="#about"><img class="button-info" src="img/info.png" title="About" alt="" /></a>
-    </div>
-    <ul id="tabs" class="buttons clearfix">
-      <li id="hash" class="on l1">Hash</li>
-      <li id="hmac" class="l2">HMAC</li>
-      <li id="crc" class="l2">CRC</li>
-      <li id="cipher" class="l3">Cipher</li>
-      <li id="net">Net</li>
-      <li id="time">Time</li>
-      <li id="number" class="l1">Num</li>
-      <li id="string" class="l3">Strings</li>
-      <li id="encode">Encode</li>
-      <li id="morse">Morse</li>
-    </ul>
-    <!-- input -->
-    <div id="input">
-      <div class="title">
-        Input:
-      </div>
-      <textarea id="input-value" autofocus></textarea>
-      <div id="input-password-wrapper">
-        <div class="title">
-          Password:
+  <div class="app-container">
+    <!-- Main Screen -->
+    <div id="main-screen" class="screen">
+      <header class="app-header">
+        <div class="header-content">
+          <h1 class="app-title">
+            <span class="title-icon">⚡</span>
+            Hasher
+          </h1>
+          <p class="app-subtitle">Cryptographic utilities for developers</p>
         </div>
-        <input id="input-password" type="text" />
-      </div>
+        <button id="info-btn" class="header-btn" title="About Hasher" aria-label="About">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </button>
+      </header>
+
+      <nav class="tab-nav">
+        <div class="tab-group">
+          <button id="hash" class="tab-btn active" data-category="hash">Hash</button>
+          <button id="hmac" class="tab-btn" data-category="hmac">HMAC</button>
+          <button id="crc" class="tab-btn" data-category="crc">CRC</button>
+          <button id="cipher" class="tab-btn" data-category="cipher">Cipher</button>
+          <button id="net" class="tab-btn" data-category="net">Net</button>
+          <button id="time" class="tab-btn" data-category="time">Time</button>
+          <button id="number" class="tab-btn" data-category="number">Numbers</button>
+          <button id="string" class="tab-btn" data-category="string">Strings</button>
+          <button id="encode" class="tab-btn" data-category="encode">Encode</button>
+          <button id="morse" class="tab-btn" data-category="morse">Morse</button>
+        </div>
+      </nav>
+
+      <main class="app-content">
+        <!-- Input Section -->
+        <section id="input" class="input-section">
+          <div class="section-header">
+            <h2>Input</h2>
+          </div>
+          <div class="input-group">
+            <textarea
+              id="input-value"
+              class="input-textarea"
+              placeholder="Enter text to hash, encode, or convert..."
+              autofocus
+            ></textarea>
+          </div>
+          <div id="input-password-wrapper" class="input-group hidden">
+            <label for="input-password" class="input-label">Password</label>
+            <input
+              id="input-password"
+              type="password"
+              class="input-field"
+              placeholder="Enter password..."
+            />
+          </div>
+        </section>
+
+        <!-- Output Section -->
+        <section id="output" class="output-section">
+          <!-- Results rendered here -->
+        </section>
+      </main>
     </div>
-    <!-- output -->
-    <div id="output">
+
+    <!-- About Screen -->
+    <div id="about" class="screen about-screen">
+      <button class="back-btn" href="#main-screen" title="Back to Hasher">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back
+      </button>
+
+      <article class="about-content">
+        <h1>About Hasher</h1>
+
+        <p class="about-intro">
+          <strong>Hasher</strong> is a powerful utility for cryptographic operations and data conversions.
+          All calculations are performed entirely on your device — your data never leaves your computer.
+        </p>
+
+        <section class="about-features">
+          <h2>Features</h2>
+          <ul>
+            <li><strong>Hash:</strong> MD5, SHA-1, SHA-2 (224, 256, 384, 512), RIPEMD-160, MD4, Whirlpool</li>
+            <li><strong>HMAC:</strong> MD5, SHA-1, SHA-2 (224, 256, 384, 512), RIPEMD-160, MD4</li>
+            <li><strong>CRC:</strong> CRC-8, CRC-16, FCS-16, FCS/CRC-32</li>
+            <li><strong>Cipher</strong> <span class="help" title="Compatible with: openssl enc -aes-256-cbc">(OpenSSL compatible)</span>: AES-256, DES, Triple DES, Rabbit, RC4, RC4Drop</li>
+            <li><strong>Network:</strong> Subnet calculator, IP conversions (Dec, Bin, Hex)</li>
+            <li><strong>Time:</strong> Unix timestamp conversions (Datetime, RFC-1123, ISO 8601)</li>
+            <li><strong>Numbers:</strong> Number system conversions (Dec ↔ Hex, Dec ↔ Bin, Dec ↔ Roman)</li>
+            <li><strong>Strings:</strong> Encoding conversions (ASCII, UTF-8, UTF-16 ↔ Hex)</li>
+            <li><strong>Encode:</strong> Base64, ROT-13, URI encoding, HTML encoding</li>
+            <li><strong>Morse:</strong> Text to Morse code conversion</li>
+          </ul>
+        </section>
+
+        <section class="about-usage">
+          <h2>How to Use</h2>
+          <p>
+            Enter or paste your text in the input field, then <strong>click on any result to copy it to your clipboard</strong>.
+            Some operations (like ciphering and HMAC) require a password — it will appear when needed.
+          </p>
+        </section>
+
+        <section class="about-credits">
+          <h2>Credits</h2>
+          <p>
+            Built with <a href="https://code.google.com/p/crypto-js/" target="_blank" rel="noopener">Crypto-JS</a>
+            and other open-source libraries.
+          </p>
+          <p>
+            <strong>Maintained by</strong> <a href="https://github.com/hiwanz" target="_blank" rel="noopener">@hiwanz</a>
+            <br/>
+            <strong>Based on</strong> <a href="https://github.com/s12v/hasher" target="_blank" rel="noopener">@s12v/hasher</a>
+          </p>
+        </section>
+      </article>
     </div>
   </div>
 
-  <div id="about">
-    <div class="nav-buttons">
-      <a href="#main" class="button">Back</a>
-    </div>
-    <h1>
-      About
-    </h1>
-    <p>
-      This app is used to compute cryptographic hashes and do common conversions. It might be useful for
-      programmers and system administrators.
-      It's entirely implemented in JavaScript, all calculations are performed on client side, so <b>it's safe</b>.
-    </p>
-    <ul>
-      <li>
-        <b>Hash</b>:
-        MD5, SHA-1, SHA-2 (224, 256, 384, 512), RIPEMD-160, MD4, Whirpool
-      </li>
-      <li>
-        <b>HMAC</b>:
-        MD5, SHA-1, SHA-2 (224, 256, 384, 512), RIPEMD-160, MD4
-      </li>
-      <li>
-        <b>CRC</b>:
-        CRC-8, CRC-16, FCS-16, FCS/CRC-32
-      </li>
-      <li>
-        <b>Cipher</b> <i
-          title='openssl enc -aes-256-cbc -in infile -out outfile -pass pass:"Secret Passphrase" -e -base64'
-          class="help">(interoperable with OpenSSL)</i>:
-        AES-256, DES, Triple DES, Rabbit, RC4, RC4Drop. CBC/Pkcs7 is used.
-      </li>
-      <li>
-        <b>Net</b>:
-        Subnet calculator, Ip &harr; Dec, Ip &rarr; Bin, Ip &rarr; Hex
-      </li>
-      <li>
-        <b>Time</b>:
-        Unix &harr; Datetime, Unix &harr; RFC-1123, Unix &harr; ISO 8601
-      </li>
-      <li>
-        <b>Numbers</b>:
-        Dec &harr; Hex, Dec &harr; Bin, Dec &harr; Roman
-      </li>
-      <li>
-        <b>Strings</b>:
-        ASCII &harr; Hex, UTF-8 &harr; Hex, UTF-16 &harr; Hex
-      </li>
-      <li>
-        <b>Encode</b>:
-        Base64, ROT-13, JavaScript encodeURI(), encodeURIComponent(), HTML special chars encode/decode
-      </li>
-    </ul>
-    <p>
-      <b>Usage:</b> enter text and click on the result. It will be <b>copied to clipboard</b>.
-    </p>
-    <p>
-      App is using <a href="http://code.google.com/p/crypto-js/" target="_blank">crypto-js</a> and other
-      open-source libraries.<br />
-    </p>
-    <p>
-      Developed by <a href="http://github.com/hiwanz" target="_blank">@hiwanz</a></strong> base on <strong>Sergey Novikov's work: <a href="http://github.com/s12v/hasher" target="_blank">@s12v/hasher</a></strong>
-    </p>
-  </div>
+  <script>
+    // Navigation between screens
+    document.getElementById('info-btn').addEventListener('click', () => {
+      window.location.hash = '#about';
+    });
 
+    document.querySelector('.back-btn').addEventListener('click', () => {
+      window.location.hash = '#main';
+    });
+
+    // Tab switching (compatibility with existing index.js)
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Update active state
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+
+        // Also update old "on" class for backward compatibility
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+        this.classList.add('on');
+      });
+    });
+
+    // Create a virtual #tabs element for backward compatibility with index.js
+    const tabsCompat = {
+      click: function(id) {
+        const btn = document.getElementById(id);
+        if (btn) btn.click();
+      }
+    };
+
+    // Patch jQuery to handle new button structure
+    if (window.jQuery) {
+      const oldJQueryFind = window.jQuery.fn.find;
+      window.jQuery.fn.find = function(selector) {
+        if (selector === '#tabs li') {
+          return window.jQuery('.tab-btn');
+        }
+        return oldJQueryFind.call(this, selector);
+      };
+    }
+  </script>
 </body>
-
 </html>
