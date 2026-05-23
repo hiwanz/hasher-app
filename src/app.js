@@ -8,7 +8,6 @@ const createWindow = () => {
     width: 800,
     height: 600,
     frame: false,
-    titleBarStyle: 'hidden',
     webPreferences: {
       devTools: false,
       preload: path.join(__dirname, 'preload.js')
