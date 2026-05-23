@@ -63,9 +63,7 @@ body {
    ============================================ */
 
 .input-panel {
-  position: relative;
-  padding: 10px 10px 0;
-  background: var(--bg);
+  padding: 8px 10px 0;
   flex-shrink: 0;
 }
 
@@ -132,13 +130,11 @@ body {
   box-shadow: 0 0 0 2px var(--accent-glow);
 }
 
-/* Info button — pinned top-right of input panel */
+/* Info button — sits at the right end of the tab row */
 .info-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   width: 26px;
   height: 26px;
+  flex-shrink: 0;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
@@ -164,6 +160,9 @@ body {
 .tab-nav {
   padding: 8px 10px 0;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .tab-group {
@@ -171,6 +170,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
+  flex: 1;
 }
 
 .tab-btn {

@@ -44,27 +44,6 @@
     <!-- Main Screen -->
     <div id="main-screen">
 
-      <!-- Input area at top -->
-      <div id="input" class="input-panel">
-        <textarea
-          id="input-value"
-          class="input-textarea"
-          placeholder="Enter text to hash, encode, or convert…"
-          autofocus
-        ></textarea>
-        <div id="input-password-wrapper">
-          <label for="input-password">Password</label>
-          <input id="input-password" type="password" placeholder="Enter password…" />
-        </div>
-        <button id="info-btn" class="info-btn" title="About" aria-label="About">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="16" x2="12" y2="12"/>
-            <line x1="12" y1="8" x2="12.01" y2="8"/>
-          </svg>
-        </button>
-      </div>
-
       <!-- Tab bar -->
       <nav class="tab-nav">
         <ul id="tabs" class="tab-group clearfix">
@@ -79,7 +58,28 @@
           <li id="encode" class="tab-btn">Encode</li>
           <li id="morse"  class="tab-btn">Morse</li>
         </ul>
+        <button id="info-btn" class="info-btn" title="About" aria-label="About">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+        </button>
       </nav>
+
+      <!-- Input area -->
+      <div id="input" class="input-panel">
+        <textarea
+          id="input-value"
+          class="input-textarea"
+          placeholder="Enter text to hash, encode, or convert…"
+          autofocus
+        ></textarea>
+        <div id="input-password-wrapper">
+          <label for="input-password">Password</label>
+          <input id="input-password" type="password" placeholder="Enter password…" />
+        </div>
+      </div>
 
       <!-- Output / results -->
       <div id="output" class="output-panel"></div>
