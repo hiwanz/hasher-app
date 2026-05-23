@@ -1,740 +1,445 @@
 /* ============================================
    Hasher — Modern Dark Theme
-   Premium developer utility interface
+   Utility-first layout: input → tabs → results
    ============================================ */
 
 :root {
-  /* Color Palette */
-  --bg-primary: #0f1419;
-  --bg-secondary: #1a202c;
-  --bg-tertiary: #2d3748;
-  --surface: rgba(255, 255, 255, 0.05);
-  --surface-hover: rgba(255, 255, 255, 0.08);
-  --surface-active: rgba(255, 255, 255, 0.12);
+  --bg:           #0f1117;
+  --bg-raised:    #1a1d27;
+  --bg-input:     #13161f;
+  --surface:      rgba(255,255,255,0.05);
+  --surface-hov:  rgba(255,255,255,0.09);
 
-  --text-primary: #f0f4f8;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #94a3b8;
+  --border:       rgba(255,255,255,0.08);
+  --border-hov:   rgba(255,255,255,0.14);
 
-  --accent-primary: #06b6d4;
-  --accent-secondary: #0891b2;
-  --accent-light: #22d3ee;
+  --text:         #e8ecf0;
+  --text-dim:     #8b95a4;
+  --text-faint:   #4b5563;
 
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-color-hover: rgba(255, 255, 255, 0.15);
+  --accent:       #06b6d4;
+  --accent-dim:   #0891b2;
+  --accent-glow:  rgba(6,182,212,0.25);
 
-  /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --mono: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-
-  /* Transitions */
-  --transition-fast: 150ms ease-in-out;
-  --transition-normal: 250ms ease-in-out;
-  --transition-smooth: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+  --r-sm: 4px;
+  --r-md: 6px;
+  --t:    150ms ease;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  scroll-behavior: smooth;
-}
+html, body { height: 100%; overflow: hidden; }
 
 body {
-  font-family: var(--font-sans);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-size: 14px;
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: var(--sans);
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
 }
 
 /* ============================================
-   App Container & Layout
+   App container
    ============================================ */
 
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(
-    135deg,
-    var(--bg-primary) 0%,
-    #0a0f14 50%,
-    var(--bg-primary) 100%
-  );
-}
-
-.screen {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  animation: fadeIn var(--transition-normal) forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 #main-screen {
   display: flex;
-}
-
-#about {
-  display: none;
-  overflow-y: auto;
-  padding: var(--spacing-2xl);
-  background-color: var(--bg-primary);
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* ============================================
-   Header
+   Input panel — fixed at top
    ============================================ */
 
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-xl) var(--spacing-2xl);
-  border-bottom: 1px solid var(--border-color);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.03) 0%,
-    transparent 100%
-  );
-  backdrop-filter: blur(10px);
-  gap: var(--spacing-xl);
+.input-panel {
+  position: relative;
+  padding: 10px 10px 0;
+  background: var(--bg);
+  flex-shrink: 0;
 }
 
-.header-content {
+.input-textarea {
+  width: 100%;
+  min-height: 80px;
+  max-height: 160px;
+  resize: vertical;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color var(--t), box-shadow var(--t);
+  display: block;
+}
+
+.input-textarea::placeholder { color: var(--text-faint); }
+
+.input-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+/* Password row */
+#input-password-wrapper {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+#input-password-wrapper label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+#input-password-wrapper input {
   flex: 1;
-}
-
-.app-title {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  margin: 0;
-}
-
-.title-icon {
-  font-size: 28px;
-  display: inline-block;
-}
-
-.app-subtitle {
+  max-width: 260px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-family: var(--mono);
   font-size: 12px;
-  color: var(--text-tertiary);
-  margin-top: var(--spacing-xs);
-  font-weight: 400;
-  letter-spacing: 0.3px;
+  padding: 5px 9px;
+  outline: none;
+  transition: border-color var(--t), box-shadow var(--t);
 }
 
-.header-btn {
+#input-password-wrapper input::placeholder { color: var(--text-faint); }
+
+#input-password-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+/* Info button — pinned top-right of input panel */
+.info-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
   background: var(--surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-dim);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-fast);
+  transition: background var(--t), color var(--t), border-color var(--t);
   padding: 0;
 }
 
-.header-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-color-hover);
-  color: var(--accent-light);
-}
-
-.header-btn:active {
-  transform: scale(0.95);
+.info-btn:hover {
+  background: var(--surface-hov);
+  border-color: var(--border-hov);
+  color: var(--accent);
 }
 
 /* ============================================
-   Navigation Tabs
+   Tab bar
    ============================================ */
 
 .tab-nav {
-  padding: var(--spacing-lg) var(--spacing-2xl);
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  border-bottom: 1px solid var(--border-color);
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  padding: 8px 10px 0;
+  flex-shrink: 0;
 }
 
 .tab-group {
+  list-style: none;
   display: flex;
-  gap: var(--spacing-sm);
   flex-wrap: wrap;
+  gap: 4px;
 }
 
 .tab-btn {
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: 4px 12px;
   background: var(--surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-dim);
+  font-family: var(--sans);
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.2px;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
+  cursor: pointer;
   user-select: none;
-  font-family: var(--font-sans);
+  transition: background var(--t), color var(--t), border-color var(--t), box-shadow var(--t);
+  white-space: nowrap;
 }
 
 .tab-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-color-hover);
-  color: var(--text-primary);
+  background: var(--surface-hov);
+  border-color: var(--border-hov);
+  color: var(--text);
 }
 
-.tab-btn.active,
 .tab-btn.on {
-  background: linear-gradient(
-    135deg,
-    var(--accent-primary) 0%,
-    var(--accent-secondary) 100%
-  );
-  border-color: var(--accent-light);
-  color: white;
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 12px var(--accent-glow);
 }
+
+/* Grouped tab borders (keep original l1/l2/l3 grouping visual) */
+.tab-btn.l1 { border-radius: var(--r-sm) 0 0 var(--r-sm); margin-right: 0; }
+.tab-btn.l2 { border-radius: 0; border-left: none; margin: 0; }
+.tab-btn.l3 { border-radius: 0 var(--r-sm) var(--r-sm) 0; border-left: none; margin: 0; margin-right: 4px; }
 
 /* ============================================
-   Main Content Area
+   Output panel — scrollable, takes remaining space
    ============================================ */
 
-.app-content {
+.output-panel {
   flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-2xl);
-  padding: var(--spacing-2xl);
   overflow-y: auto;
   overflow-x: hidden;
+  padding: 8px 10px 12px;
 }
 
-@media (max-width: 1200px) {
-  .app-content {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ============================================
-   Input Section
-   ============================================ */
-
-.input-section,
-.output-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-}
-
-.section-header h2 {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: 0.3px;
-  margin: 0;
-}
-
-.section-header::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--border-color) 50%,
-    transparent 100%
-  );
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.input-group.hidden {
-  display: none;
-}
-
-#input-password-wrapper {
-  display: none;
-}
-
-#input-password-wrapper.show {
-  display: flex;
-}
-
-.input-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.input-textarea,
-.input-field {
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-radius: 8px;
-  padding: var(--spacing-md);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1.5;
-  transition: all var(--transition-fast);
-  resize: none;
-}
-
-.input-textarea {
-  min-height: 200px;
-  max-height: 400px;
-}
-
-.input-field {
-  padding: var(--spacing-md);
-  min-height: 36px;
-}
-
-.input-textarea:focus,
-.input-field:focus {
-  background: var(--surface-active);
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
-  outline: none;
-}
-
-.input-textarea::placeholder,
-.input-field::placeholder {
-  color: var(--text-tertiary);
-}
-
-/* ============================================
-   Output Section
-   ============================================ */
-
-.output-section {
-  min-height: 200px;
-}
-
-#output {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
+/* Each result element */
 .element {
-  animation: slideIn var(--transition-smooth) forwards;
+  margin-top: 8px;
+  animation: fadeUp 180ms ease forwards;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
 }
 
 .element .title {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.5px;
+  color: var(--text-dim);
   text-transform: uppercase;
-  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
 }
 
 .element .expand {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
-  color: var(--accent-light);
-  font-size: 11px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  text-decoration: none;
   display: none;
-  letter-spacing: 0.3px;
+  padding: 2px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--r-sm) var(--r-sm) 0 0;
+  color: var(--accent);
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color var(--t);
+  position: relative;
+  left: 8px;
 }
 
-.element .expand:hover {
-  background: var(--surface-hover);
-  color: var(--accent-primary);
-}
+.element .expand:hover { color: #fff; }
 
 .element .note {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background: rgba(34, 211, 238, 0.1);
-  border-left: 2px solid var(--accent-light);
-  color: var(--accent-light);
+  display: inline-block;
+  padding: 1px 8px;
+  background: rgba(6,182,212,0.1);
+  border-left: 2px solid var(--accent);
+  color: var(--accent);
   font-size: 11px;
   font-weight: 500;
-  border-radius: 4px;
-  margin-bottom: var(--spacing-md);
+  border-radius: 2px;
+  margin-bottom: 4px;
+  position: relative;
+  left: 16px;
 }
 
 .element .value {
-  padding: var(--spacing-md);
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-top: 1px solid var(--border-color);
-  border-radius: 0 0 6px 6px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 6px 8px;
   cursor: pointer;
-  transition: all var(--transition-fast);
   position: relative;
-  overflow: hidden;
+  transition: border-color var(--t), box-shadow var(--t), background var(--t);
 }
 
 .element .value:hover {
-  background: var(--surface-hover);
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.2);
+  background: var(--surface-hov);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 .element .value textarea {
   background: transparent;
   border: none;
-  color: var(--text-primary);
-  font-family: var(--font-mono);
+  color: var(--text);
+  font-family: var(--mono);
   font-size: 12px;
   width: 100%;
   cursor: pointer;
   resize: none;
-  max-height: 300px;
   outline: none;
+  line-height: 1.5;
 }
 
 .element .ruler {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 6px;
+  top: 6px;
   font-size: 11px;
-  color: var(--text-tertiary);
-  padding: var(--spacing-md);
+  color: var(--text-faint);
+  font-family: var(--mono);
   pointer-events: none;
-  font-family: var(--font-mono);
-}
-
-.element .ruler span {
-  transition: all var(--transition-fast);
 }
 
 .element .ruler span:hover {
-  color: var(--accent-light);
-  text-shadow: 0 0 8px rgba(34, 211, 238, 0.4);
+  color: var(--accent);
+  outline: 1px solid var(--accent-dim);
 }
 
 /* ============================================
-   About Screen
+   About screen
    ============================================ */
 
-.about-screen {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  animation: slideIn var(--transition-normal) forwards;
+#about {
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--bg);
+}
+
+.about-topbar {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .back-btn {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  font-size: 14px;
+  gap: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-dim);
+  font-family: var(--sans);
+  font-size: 12px;
   font-weight: 500;
-  transition: all var(--transition-fast);
-  font-family: var(--font-sans);
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background var(--t), color var(--t), border-color var(--t);
 }
 
 .back-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-color-hover);
-  color: var(--accent-light);
+  background: var(--surface-hov);
+  border-color: var(--border-hov);
+  color: var(--accent);
 }
 
 .about-content {
-  padding-top: var(--spacing-2xl);
+  padding: 24px 28px 40px;
+  max-width: 680px;
 }
 
 .about-content h1 {
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: var(--spacing-2xl);
-  letter-spacing: -1px;
-}
-
-.about-content h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: var(--spacing-2xl) 0 var(--spacing-lg);
-  color: var(--accent-light);
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
 }
 
 .about-intro {
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-2xl);
-  padding: var(--spacing-lg);
-  background: var(--surface);
-  border-left: 3px solid var(--accent-primary);
-  border-radius: 4px;
-}
-
-.about-features ul,
-.about-credits {
-  margin-bottom: var(--spacing-2xl);
-}
-
-.about-features li {
-  margin-bottom: var(--spacing-lg);
-  padding-left: var(--spacing-lg);
-  position: relative;
+  color: var(--text-dim);
   line-height: 1.7;
+  margin-bottom: 24px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  border-radius: 2px;
 }
 
-.about-features li::before {
+.about-content h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 20px 0 10px;
+}
+
+.about-content ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-content li {
+  padding-left: 14px;
+  position: relative;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.about-content li::before {
   content: '▸';
   position: absolute;
   left: 0;
-  color: var(--accent-primary);
-  font-weight: bold;
+  color: var(--accent);
 }
 
-.about-features strong {
-  color: var(--accent-light);
-}
+.about-content li strong { color: var(--text); }
 
-.help {
-  color: var(--accent-light);
-  cursor: help;
-  border-bottom: 1px dashed var(--accent-primary);
-  transition: all var(--transition-fast);
-  font-style: italic;
-}
-
-.help:hover {
-  color: white;
-  text-shadow: 0 0 8px rgba(34, 211, 238, 0.3);
+.about-content p {
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-top: 8px;
 }
 
 .about-content a {
-  color: var(--accent-light);
+  color: var(--accent);
   text-decoration: none;
-  transition: all var(--transition-fast);
   border-bottom: 1px solid transparent;
+  transition: border-color var(--t);
 }
 
-.about-content a:hover {
-  border-bottom-color: var(--accent-primary);
-}
+.about-content a:hover { border-bottom-color: var(--accent); }
 
-.about-credits p {
-  margin-bottom: var(--spacing-md);
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-/* ============================================
-   Utilities & Helpers
-   ============================================ */
-
-.clearfix::after {
-  content: '';
-  display: table;
-  clear: both;
+.help {
+  color: var(--accent);
+  cursor: help;
+  border-bottom: 1px dashed var(--accent-dim);
+  font-style: italic;
 }
 
 /* ============================================
-   Scrollbar Styling
+   Scrollbar
    ============================================ */
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--surface);
-  border-radius: 4px;
-  transition: all var(--transition-fast);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--surface-hover);
-}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--surface-hov); }
 
 /* ============================================
-   Focus & Accessibility
+   Utilities
    ============================================ */
 
-:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-
-/* ============================================
-   Responsive Design
-   ============================================ */
-
-@media (max-width: 768px) {
-  .app-header {
-    padding: var(--spacing-lg);
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .app-title {
-    font-size: 20px;
-  }
-
-  .app-subtitle {
-    font-size: 11px;
-  }
-
-  .tab-nav {
-    padding: var(--spacing-md) var(--spacing-lg);
-  }
-
-  .tab-group {
-    gap: var(--spacing-xs);
-  }
-
-  .tab-btn {
-    padding: var(--spacing-xs) var(--spacing-md);
-    font-size: 12px;
-  }
-
-  .app-content {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-lg);
-  }
-
-  .input-textarea {
-    min-height: 150px;
-  }
-
-  #about {
-    padding: var(--spacing-lg);
-  }
-
-  .about-content h1 {
-    font-size: 24px;
-  }
-
-  .about-content h2 {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    font-size: 13px;
-  }
-
-  .app-title {
-    font-size: 18px;
-  }
-
-  .tab-btn {
-    padding: var(--spacing-xs) var(--spacing-sm);
-    font-size: 11px;
-  }
-
-  .input-textarea {
-    min-height: 120px;
-    font-size: 12px;
-  }
-
-  .app-content {
-    padding: var(--spacing-md);
-  }
-}
-
-/* ============================================
-   Print Styles
-   ============================================ */
-
-@media print {
-  .app-header,
-  .tab-nav,
-  .header-btn,
-  .back-btn {
-    display: none;
-  }
-
-  body {
-    background: white;
-    color: black;
-  }
-}
+.clearfix::after { content: ''; display: table; clear: both; }
