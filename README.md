@@ -1,5 +1,9 @@
 # Hasher App
 
+## Screenshot
+
+![Hasher App](Screenshot.png)
+
 ## Introduction
 
 Standalone version for https://s12v.github.io/hasher/
