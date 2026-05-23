@@ -39,6 +39,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Validate version
+        shell: bash
         run: |
           TAG_NAME="${{ github.ref_name }}"
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
