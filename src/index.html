@@ -44,6 +44,16 @@
     <!-- Main Screen -->
     <div id="main-screen">
 
+      <!-- Custom title bar -->
+      <div class="titlebar">
+        <div class="titlebar-drag"></div>
+        <div class="titlebar-controls">
+          <button class="wc-btn wc-close"    id="wc-close"    title="Close"    aria-label="Close"></button>
+          <button class="wc-btn wc-minimize" id="wc-minimize" title="Minimize" aria-label="Minimize"></button>
+          <button class="wc-btn wc-maximize" id="wc-maximize" title="Maximize" aria-label="Maximize"></button>
+        </div>
+      </div>
+
       <!-- Tab bar -->
       <nav class="tab-nav">
         <ul id="tabs" class="tab-group clearfix">
@@ -138,6 +148,13 @@
     document.querySelector('.back-btn').addEventListener('click', () => {
       window.location.hash = '';
     });
+
+    // Custom window controls
+    if (window.electronAPI) {
+      document.getElementById('wc-close').addEventListener('click',    () => window.electronAPI.close());
+      document.getElementById('wc-minimize').addEventListener('click', () => window.electronAPI.minimize());
+      document.getElementById('wc-maximize').addEventListener('click', () => window.electronAPI.maximize());
+    }
   </script>
 </body>
 </html>
